@@ -1,0 +1,176 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Cadastro - Dra Suzy de Paula Corrêa</title>
+    <style>
+        @media (max-width: 600px) {
+            .navbar-nav {
+                text-align: right;
+            }
+        }
+
+        .bg-gradiente {
+            background: rgba(0, 123, 255, 1);
+            background: -moz-linear-gradient(left, rgba(0, 123, 255, 1) 0%, rgba(0, 68, 240, 1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0, 123, 255, 1)), color-stop(100%, rgba(0, 68, 240, 1)));
+            background: -webkit-linear-gradient(left, rgba(0, 123, 255, 1) 0%, rgba(0, 68, 240, 1) 100%);
+            background: -o-linear-gradient(left, rgba(0, 123, 255, 1) 0%, rgba(0, 68, 240, 1) 100%);
+            background: -ms-linear-gradient(left, rgba(0, 123, 255, 1) 0%, rgba(0, 68, 240, 1) 100%);
+            background: linear-gradient(to right, rgba(0, 123, 255, 1) 0%, rgba(0, 68, 240, 1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007bff', endColorstr='#0044f0', GradientType=1);
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="bg-gradiente py-2">
+        <div class="container">
+            <h1 class="text-white">
+                Sistema Odontológico
+            </h1>
+        </div>
+    </div>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-gradiente" style="min-height: 60px;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo Odontologia" style="position: absolute; top: 10px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Paciente <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Convênio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dentista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Serviço</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav> -->
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 pb-5">
+                <h2 class="py-2 pl-2 text-white bg-gradiente">Consultas</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="paciente">Paciente</label>
+                        <input type="text" class="form-control" id="paciente" placeholder="Nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="convenio">Convênio</label>
+                        <input type="text" class="form-control" id="convenio">
+                    </div>
+                    <div class="form-group">
+                        <label for="servico">Serviço</label>
+                        <input type="text" class="form-control" id="servico">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="data">Data</label>
+                                <input type="date" class="form-control" id="data">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="valor">Valor</label>
+                                <input type="text" class="form-control" id="valor">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-secondary">Apagar</button>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-7 col-sm-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="logo.png" alt="Logo Odontologia">
+                            </div>
+                            <div class="col-5">
+                                <a class="btn btn-success w-100 text-white mb-3">Paciente</a>
+                                <a class="btn btn-success w-100 text-white mb-3">Dentista</a>
+                            </div>
+                            <div class="col-5               ">
+                                    <a class="btn btn-success w-100 text-white mb-3">Convênio</a>
+                                    <a class="btn btn-success w-100 text-white mb-3">Serviço</a>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-12 pt-3">
+                        <h2 class="py-2 pl-2 text-white bg-gradiente">Visualização Consulta</h2>
+                        <div class="table-responsive" style="max-height: 250px;">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Paciente</th>
+                                        <th scope="col">Convênio</th>
+                                        <th scope="col">Serviço</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">João</th>
+                                        <td>AMIL</td>
+                                        <td>Limpeza</td>
+                                        <td>20/05/2019</td>
+                                        <td>R$ 54,00</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Ana</th>
+                                        <td>UNIMED</td>
+                                        <td>Extração</td>
+                                        <td>20/05/2019</td>
+                                        <td>R$ 120,00</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
