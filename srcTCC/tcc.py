@@ -8,6 +8,23 @@ import pyodbc
 app = Flask(__name__)
 CORS(app)
 
+server = 'DESKTOP-6CP0SSO' 
+    database = 'TCC2' 
+    username = 'rafael'
+    password = 'root'
+    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+    cursor = cnxn.cursor()
+
+class Consulta:
+    def __init__(self, nomePaciente, convenio, servico,datahora,valor):
+        self.nomePaciente = nomePaciente
+        self.convenio = convenio
+        self.servico = servico
+        self.datahora = datahora
+        self.valor = valor
+
+listaConsultas = []
+
 @app.route('/')
 def home():
     params = {
@@ -21,12 +38,16 @@ def consultas():
         'title':'Sistema Odonto Teste'
     }
 
-    server = 'DESKTOP-JCQQMHI/SQLEXPRESS' 
-    database = 'DW_TCC' 
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database)
-    cursor = cnxn.cursor()
+    nomePaciente = request.form['paciente']
+    convenio = request.form['convenio']
+    servico = request.form['servico']
+    datahora = request.form['datahora']
+    valor = request.form['valor']
+    consulta = Consulta(nomePaciente,convenio,servico,datahora,valor)
 
-    cursor.execute("INSERT INTO DW_TCC.F_CONSULTAS (Name, ProductNumber, StandardCost, ListPrice, SellStartDate) OUTPUT INSERTED.ProductID VALUES ('SQL Server Express New 20', 'SQLEXPRESS New 20', 0, 0, CURRENT_TIMESTAMP )") 
+    listaConsultas.append(consulta)
+
+    #cursor.execute("INSERT INTO DW_TCC.F_CONSULTAS (Name, ProductNumber, StandardCost, ListPrice, SellStartDate) OUTPUT INSERTED.ProductID VALUES ('SQL Server Express New 20', 'SQLEXPRESS New 20', 0, 0, CURRENT_TIMESTAMP )") 
     
 
     # cursor.execute("SELECT @@version;") 
@@ -40,7 +61,7 @@ def consultas():
     #     print ('Inserted Product key is ' + str(row[0]))
     #     row = cursor.fetchone()
 
-    return render_template('rafa.html', params=params)
+    return render_template('rafa.html', params=params, consultas = listaConsultas)
 
 @app.route('/dentistas', methods=['POST','GET'])
 def dentistas():
