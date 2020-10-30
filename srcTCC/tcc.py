@@ -8,12 +8,7 @@ import pyodbc
 app = Flask(__name__)
 CORS(app)
 
-server = 'DESKTOP-6CP0SSO' 
-    database = 'TCC2' 
-    username = 'rafael'
-    password = 'root'
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-    cursor = cnxn.cursor()
+
 
 class Consulta:
     def __init__(self, nomePaciente, convenio, servico,datahora,valor):
@@ -25,33 +20,47 @@ class Consulta:
 
 listaConsultas = []
 
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def home():
     params = {
         'title':'Sistema Odonto Teste'
     }
+
+    server = 'DESKTOP-6CP0SSO' 
+    database = 'TCC2' 
+    username = 'rafael'
+    password = 'root'
+    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+    cursor = cnxn.cursor()
+
+    cursor.execute("SELECT top 5 NM_PAC, DS_SERV, p.CONVENIO,c.DT_CONSULTA, c.VALOR_CONSULTA FROM F_CONSULTAS C INNER JOIN D_PACIENTES P ON P.ID_PACIENTE = C.ID_PACIENTE INNER JOIN D_SERVICOS S ON C.ID_SERVICO = S.ID_SERVICO INNER JOIN	D_CONVENIOS con ON con.ID_CONVENIO= c.ID_CONVENIO")
+
+    for row in cursor:
+        print (row)
+
     return render_template('rafa.html', params=params)
 
 @app.route('/consultas', methods=['GET','POST'])
 def consultas():
+    print('entrou metodo')
     params = {
         'title':'Sistema Odonto Teste'
     }
 
-    nomePaciente = request.form['paciente']
-    convenio = request.form['convenio']
-    servico = request.form['servico']
-    datahora = request.form['datahora']
-    valor = request.form['valor']
-    consulta = Consulta(nomePaciente,convenio,servico,datahora,valor)
+    # nomePaciente = request.form['paciente']
+    # convenio = request.form['convenio']
+    # servico = request.form['servico']
+    # datahora = request.form['datahora']
+    # valor = request.form['valor']
+    # consulta = Consulta(nomePaciente,convenio,servico,datahora,valor)
 
-    listaConsultas.append(consulta)
+    #listaConsultas.append(consulta)
 
     #cursor.execute("INSERT INTO DW_TCC.F_CONSULTAS (Name, ProductNumber, StandardCost, ListPrice, SellStartDate) OUTPUT INSERTED.ProductID VALUES ('SQL Server Express New 20', 'SQLEXPRESS New 20', 0, 0, CURRENT_TIMESTAMP )") 
     
 
     # cursor.execute("SELECT @@version;") 
-    # row = cursor.fetchone() 
+    # row = cursor.fetchone() ,,,,,,,,,,,,,,,,,,,,,,
     # while row: 
     #     print (row[0] )
     #     row = cursor.fetchone()
@@ -60,8 +69,8 @@ def consultas():
     # while row: 
     #     print ('Inserted Product key is ' + str(row[0]))
     #     row = cursor.fetchone()
-
-    return render_template('rafa.html', params=params, consultas = listaConsultas)
+    #print(consulta)
+    return render_template('rafa.html', params=params,)
 
 @app.route('/dentistas', methods=['POST','GET'])
 def dentistas():
