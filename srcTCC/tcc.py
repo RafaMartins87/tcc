@@ -8,13 +8,6 @@ import pyodbc
 app = Flask(__name__)
 CORS(app)
 
-# server = 'DESKTOP-6CP0SSO' 
-#     database = 'TCC2' 
-#     username = 'rafael'
-#     password = 'root'
-#     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-#     cursor = cnxn.cursor()
-
 class Consulta:
     def __init__(self, nomePaciente, convenio, servico,datahora,valor):
         self.nomePaciente = nomePaciente
@@ -31,10 +24,7 @@ def home():
         'title':'Sistema Odonto Teste'
     }
 
-    server = 'DESKTOP-6CP0SSO' 
-    database = 'TCC2' 
-    username = 'rafael'
-    password = 'root'
+    
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
 
@@ -49,14 +39,8 @@ def home():
 @app.route('/consultas', methods=['GET','POST'])
 def consultas():
     print('entrou metodo')
-    params = {
-        'title':'Sistema Odonto Teste'
-    }
 
-    server = 'xx' 
-    database = 'xx' 
-    username = 'xx'
-    password = 'xx'
+    
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
 
@@ -87,7 +71,7 @@ def consultas():
 
     cursor.execute("INSERT INTO F_CONSULTAS (ID_CONSULTA, ID_DENTISTA, ID_CONVENIO, ID_SERVICO, DT_CONSULTA,VALOR_CONSULTA, ID_PACIENTE) VALUES(?,?,?,?,?,?,?)",p)
 
-    return render_template('rafa.html', params=params,)
+    return render_template('rafa.html')
 
 @app.route('/dentistas', methods=['POST','GET'])
 def dentistas():
