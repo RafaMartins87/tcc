@@ -53,12 +53,30 @@ def consultas():
         'title':'Sistema Odonto Teste'
     }
 
-    server = 'DESKTOP-6CP0SSO' 
-    database = 'TCC2' 
-    username = 'rafael'
-    password = 'root'
+    server = 'xx' 
+    database = 'xx' 
+    username = 'xx'
+    password = 'xx'
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
+
+    idConsulta = 1000
+    idConsulta = idConsulta + 1
+    nomePaciente = request.form['paciente']
+    #VERIFICAR SE NOME EXISTE NA BASE 
+    #SE SIM BUSCAR ID E GUARDAR, SE NÃO PRINTA MENSAGEM 
+    
+    count = cursor.execute("SELECT COUNT(*) FROM D_PACIENTES WHERE NM_PAC LIKE ?",nomePaciente).fetchval()
+    if count>=1:
+        idPac = cursor.execute("SELECT ID_PACIENTE FROM D_PACIENTES WHERE NM_PAC LIKE ?").fetchval()
+
+    convenio = request.form['convenio']
+    servico = request.form['servico']
+    datahora = request.form['datahora']
+    valor = request.form['valor']
+    consulta = Consulta(nomePaciente,convenio,servico,datahora,valor)
+
+    cursor.execute("INSERT INTO F_CONSULTAS (ID_CONSULTA, ID_DENTISTA, ID_CONVENIO, ID_SERVICO, DT_CONSULTA,VALOR_CONSULTA, ID_PACIENTE) VALUES(?,?,?,?,?,?,?)")
 
     return render_template('rafa.html', params=params,)
 
