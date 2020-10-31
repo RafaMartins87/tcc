@@ -136,10 +136,10 @@
                                 <tbody>
                                     {% for consulta in consultas %}
                                         <tr>
-                                            <td>{{consulta.paciente}}</td>
+                                            <td style="max-width:100%;white-space:nowrap;">{{consulta.paciente}}</td>
                                             <td>{{consulta.convenio}}</td>
                                             <td>{{consulta.servico}}</td>
-                                            <td>{{consulta.data}}</td>
+                                            <td style="max-width:100%;white-space:nowrap;">{{consulta.data}}</td>
                                             <td>{{consulta.valor}}</td>
                                         </tr>
                                     {%  endfor %}

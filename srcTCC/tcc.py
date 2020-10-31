@@ -33,12 +33,13 @@ def home():
     cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
     cursor = cnxn.cursor()
 
-    cursor.execute("SELECT top 5 NM_PAC, DS_SERV, p.CONVENIO,c.DT_CONSULTA, c.VALOR_CONSULTA FROM F_CONSULTAS C INNER JOIN D_PACIENTES P ON P.ID_PACIENTE = C.ID_PACIENTE INNER JOIN D_SERVICOS S ON C.ID_SERVICO = S.ID_SERVICO INNER JOIN	D_CONVENIOS con ON con.ID_CONVENIO= c.ID_CONVENIO")
+    listaHome = cursor.execute("SELECT top 5 NM_PAC,p.CONVENIO,DS_SERV,c.DT_CONSULTA, c.VALOR_CONSULTA FROM F_CONSULTAS C INNER JOIN D_PACIENTES P ON P.ID_PACIENTE = C.ID_PACIENTE INNER JOIN D_SERVICOS S ON C.ID_SERVICO = S.ID_SERVICO INNER JOIN	D_CONVENIOS con ON con.ID_CONVENIO= c.ID_CONVENIO")
 
-    for row in cursor:
-        print (row)
+    for item in listaHome:  
+        consulta = Consulta(item.NM_PAC, item.CONVENIO, item.DS_SERV,item.DT_CONSULTA,item.VALOR_CONSULTA)
+        listaConsultas.append(consulta)
 
-    return render_template('rafa.html', params=params)
+    return render_template('rafa.html', params=params, consultas = listaConsultas)
 
 @app.route('/consultas', methods=['GET','POST'])
 def consultas():
