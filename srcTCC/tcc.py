@@ -71,12 +71,21 @@ def consultas():
         idPac = cursor.execute("SELECT ID_PACIENTE FROM D_PACIENTES WHERE NM_PAC LIKE ?").fetchval()
 
     convenio = request.form['convenio']
+    count = cursor.execute("SELECT COUNT(*) FROM D_CONVENIOS WHERE DS_CONV LIKE ?",convenio).fetchval()
+    if count>=1:
+        idConvenio = cursor.execute("SELECT ID_CONVENIO FROM D_CONVENIOS WHERE DS_CONV LIKE ?",convenio).fetchval()
+
     servico = request.form['servico']
+    count = cursor.execute("SELECT COUNT(*) FROM D_SERVICOS WHERE DS_SERV LIKE ?",servico).fetchval()
+    if count>=1:
+        idServico = cursor.execute("SELECT ID_SERVICO FROM D_SERVICOS WHERE DS_SERV LIKE ?",servico).fetchval()
+
     datahora = request.form['datahora']
     valor = request.form['valor']
-    consulta = Consulta(nomePaciente,convenio,servico,datahora,valor)
 
-    cursor.execute("INSERT INTO F_CONSULTAS (ID_CONSULTA, ID_DENTISTA, ID_CONVENIO, ID_SERVICO, DT_CONSULTA,VALOR_CONSULTA, ID_PACIENTE) VALUES(?,?,?,?,?,?,?)")
+    p = [idConsulta,idPac, idConvenio, idServico, datahora, valor]
+
+    cursor.execute("INSERT INTO F_CONSULTAS (ID_CONSULTA, ID_DENTISTA, ID_CONVENIO, ID_SERVICO, DT_CONSULTA,VALOR_CONSULTA, ID_PACIENTE) VALUES(?,?,?,?,?,?,?)",p)
 
     return render_template('rafa.html', params=params,)
 
